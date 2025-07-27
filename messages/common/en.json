@@ -1,5 +1,21 @@
 {
   "common": {
-    "Cancel": "Cancel"
+    "header": {
+      "home": "Home",
+      "collection": "collection",
+      "about": "About",
+      "contact": "Contact",
+      "policy": "Policy"
+    },
+    "footer": {
+      "home": "Home",
+      "collection": "collection",
+      "about": "About",
+      "contact": "Contact",
+      "policy": "Policy",
+      "heroSubtitle": "The best place to buy and sell fashion products",
+      "followUs": "Follow us",
+      "allRightsReserved": "All rights reserved."
+    }
   }
 }

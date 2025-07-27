@@ -1,5 +1,21 @@
 {
   "common": {
-    "Cancel": "إلغاء"
+    "header": {
+      "home": "الصفحة الرئيسية",
+      "collection": "المجموعة",
+      "about": "حول",
+      "contact": "اتصل بنا",
+      "policy": "سياسة الخصوصية"
+    },
+    "footer": {
+      "home": "الصفحة الرئيسية",
+      "collection": "المجموعة",
+      "about": "حول",
+      "contact": "اتصل بنا",
+      "policy": "سياسة الخصوصية",
+      "heroSubtitle": " أفضل مكان لشراء وبيع المنتجات الفashion",
+      "followUs": "تابعنا",
+      "allRightsReserved": "جميع الحقوق محفوظة."
+    }
   }
 }
