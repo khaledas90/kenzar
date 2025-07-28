@@ -7,6 +7,18 @@
       "contact": "Contact",
       "policy": "Policy"
     },
+    "hero": {
+    "heroTitle": "KENZAR",
+    "heroSubtitle": "A psychological identity wrapped in fabric",
+    "heroDescription": "You don't have to be rich to wear something unique",
+    "heroTagline": "Kenzar, comfort... ostentation... meaning",
+    "exploreCollection": "Explore Collection",
+    "orderNow": "Order Now",
+    "collectionTitle": "Our Collection",
+    "collectionDescription": "Discover our curated selection of elegant streetwear",
+    "aboutTitle": "About KENZAR",
+    "aboutDescription": "KENZAR represents more than fashion—it's a psychological statement. We create clothing that speaks to the soul of young adults who seek meaning in their style."
+  },
     "footer": {
       "home": "Home",
       "collection": "collection",
@@ -16,6 +28,34 @@
       "heroSubtitle": "The best place to buy and sell fashion products",
       "followUs": "Follow us",
       "allRightsReserved": "All rights reserved."
+    },
+    "about": {
+    "aboutTitle": "About KENZAR",
+    "heroDescription":"You don't have to be rich to wear something unique",
+    "heroSubtitle":"A psychological identity wrapped in fabric",
+    "aboutDescription": "KENZAR represents more than fashion—it is a psychological statement. We create clothing that speaks to the soul of young adults who seek meaning in their style."
+    },
+    "collection": {
+      "collectionTitle": "KENZAR Collection",
+      "collectionDescription": "Discover the essence of KENZAR's vision—where psychological comfort meets sophisticated design in minimalist streetwear.",
+      "orderNow": "Order Now"
+    },
+    "contact": {
+      "contactTitle": "Get in Touch",
+      "contactDescription": "We're here to answer your questions, assist with orders, or help bring your custom ideas to life. Connect with KENZAR today!",
+      "instagram": "Instagram",
+      "whatsapp": "WhatsApp"
+    },
+    "policy": {
+      "policyTitle": "Return & Delivery Policy"
+    },
+    "store": {
+      "store": "Online Store"
+    },
+    "productDetails": {
+      "home": "Home",
+      "collection": "Collection",
+      "orderNow": "Order Now"
     }
   }
 }
