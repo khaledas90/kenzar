@@ -8,17 +8,19 @@
       "policy": "Policy"
     },
     "hero": {
-    "heroTitle": "KENZAR",
-    "heroSubtitle": "A psychological identity wrapped in fabric",
-    "heroDescription": "You don't have to be rich to wear something unique",
-    "heroTagline": "Kenzar, comfort... ostentation... meaning",
-    "exploreCollection": "Explore Collection",
-    "orderNow": "Order Now",
-    "collectionTitle": "Our Collection",
-    "collectionDescription": "Discover our curated selection of elegant streetwear",
-    "aboutTitle": "About KENZAR",
-    "aboutDescription": "KENZAR represents more than fashion—it's a psychological statement. We create clothing that speaks to the soul of young adults who seek meaning in their style."
-  },
+      "heroTitle": "KENZAR",
+      "heroSubtitle": "A psychological identity wrapped in fabric",
+      "heroDescription": "You don't have to be rich to wear something unique",
+      "heroTagline": "Kenzar, comfort... ostentation... meaning",
+      "exploreCollection": "Explore Collection",
+      "orderNow": "Order Now",
+      "Learn More": "Learn More",
+      "collectionTitle": "Our Collection",
+      "View Full Collection": "View Full Collection",
+      "collectionDescription": "Discover our curated selection of elegant streetwear",
+      "aboutTitle": "About KENZAR",
+      "aboutDescription": "KENZAR represents more than fashion—it's a psychological statement. We create clothing that speaks to the soul of young adults who seek meaning in their style."
+    },
     "footer": {
       "home": "Home",
       "collection": "collection",
@@ -30,10 +32,11 @@
       "allRightsReserved": "All rights reserved."
     },
     "about": {
-    "aboutTitle": "About KENZAR",
-    "heroDescription":"You don't have to be rich to wear something unique",
-    "heroSubtitle":"A psychological identity wrapped in fabric",
-    "aboutDescription": "KENZAR represents more than fashion—it is a psychological statement. We create clothing that speaks to the soul of young adults who seek meaning in their style."
+      "aboutTitle": "About KENZAR",
+      "heroDescription": "You don't have to be rich to wear something unique",
+      "heroSubtitle": "A psychological identity wrapped in fabric",
+      "Learn More": "Learn More",
+      "aboutDescription": "KENZAR represents more than fashion—it is a psychological statement. We create clothing that speaks to the soul of young adults who seek meaning in their style."
     },
     "collection": {
       "collectionTitle": "KENZAR Collection",

@@ -26,9 +26,9 @@ const Header = () => {
         <Link
           key={item.href}
           href={item.href}
-          className={`${
-            mobile ? "block py-3 px-1.5 text-lg" : "inline-block"
-          } transition-elegant hover:text-secondary ${
+          className={`  ${
+            mobile ? "block py-3 px-1.5 text-lg" : "inline-block "
+          } transition-elegant hover:text-[#252219] ${
             usePathname() === item.href
               ? "text-secondary font-medium"
               : "text-foreground"
@@ -40,7 +40,6 @@ const Header = () => {
       ))}
     </>
   );
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4 py-4">
@@ -52,10 +51,10 @@ const Header = () => {
             KENZAR
           </Link>
 
-          <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
+          <div className="hidden md:flex items-center space-x-8 ">
             <NavLinks />
           </div>
-          <div className="flex items-center space-x-4 rtl:space-x-reverse">
+          <div className="flex items-center space-x-4 ">
             <SwitchLang />
 
             {/* Mobile Menu */}

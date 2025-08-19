@@ -14,6 +14,8 @@
       "heroTagline": "كنزار، راحة... بهرجة... معنى",
       "exploreCollection": "استعرض المجموعة",
       "orderNow": "اطلب الآن",
+      "Learn More": "اعرف المزيد",
+      "View Full Collection": "اعرض المجموعة كاملة",
       "collectionTitle": "مجموعتنا",
       "collectionDescription": "اكتشف تشكيلتنا المختارة من أزياء الشارع الأنيقة",
       "aboutTitle": "حول كنزار",
@@ -25,7 +27,7 @@
       "about": "حول",
       "contact": "اتصل بنا",
       "policy": "سياسة الخصوصية",
-      "heroSubtitle": " أفضل مكان لشراء وبيع المنتجات الفashion",
+      "heroSubtitle": " أفضل مكان لشراء وبيع المنتجات الفاشون",
       "followUs": "تابعنا",
       "allRightsReserved": "جميع الحقوق محفوظة."
     },
@@ -33,6 +35,7 @@
       "aboutTitle": "حول كنزار",
       "heroDescription": "لست بحاجة لأن تكون ثريًا لترتدي شيئًا فريدًا",
       "heroSubtitle": "هوية نفسية ملفوفة في القماش",
+      "Learn More": "اعرف المزيد",
       "aboutDescription": "كنزار تمثل أكثر من مجرد أزياء—إنها بيان نفسي. نحن نصنع ملابس تتحدث إلى روح الشباب الذين يبحثون عن المعنى في أسلوبهم."
     },
     "collection": {
