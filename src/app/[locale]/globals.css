@@ -43,37 +43,69 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+      /* KENZAR Brand Colors */
+      --background: #ffffff; /* 0 0% 100% */
+      --foreground: #000000; /* 0 0% 0% */
+  
+      --card: #ffffff;
+      --card-foreground: #000000;
+  
+      --popover: #ffffff;
+      --popover-foreground: #000000;
+  
+      /* Primary: Black */
+      --primary: #000000; /* 0 0% 0% */
+      --primary-foreground: #ffffff; /* 0 0% 100% */
+  
+      /* Secondary: Dark Olive */
+      --secondary: #3c433b; /* 83 13% 28% */
+      --secondary-foreground: #ffffff;
+  
+      /* Muted: Light Gray */
+      --muted: #d9d9d9; /* 0 0% 85% */
+      --muted-foreground: #737373; /* 0 0% 45% */
+  
+      --accent: #3c433b;
+      --accent-foreground: #ffffff;
+  
+      --destructive: #e11900; /* 0 84.2% 60.2% */
+      --destructive-foreground: #ffffff;
+  
+      --border: #d9d9d9;
+      --input: #f2f2f2;
+      --ring: #000000;
+  
+      --radius: 0.125rem;
+  
+      /* KENZAR Custom Design Tokens */
+      --kenzar-black: #000000;
+      --kenzar-olive: #3c433b;
+      --kenzar-gray: #d9d9d9;
+      
+      /* Gradients */
+      --gradient-hero: linear-gradient(135deg, #000000, #3c433b);
+      --gradient-subtle: linear-gradient(180deg, #ffffff, #d9d9d9);
+      
+      /* Shadows */
+      --shadow-elegant: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+      --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                     0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      
+      /* Transitions */
+      --transition-elegant: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-quick: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+      /* Sidebar */
+      --sidebar-background: #fafafa; /* 0 0% 98% */
+      --sidebar-foreground: #3f3f46; /* 240 5.3% 26.1% */
+      --sidebar-primary: #18181b; /* 240 5.9% 10% */
+      --sidebar-primary-foreground: #fafafa;
+      --sidebar-accent: #f4f4f5; /* 240 4.8% 95.9% */
+      --sidebar-accent-foreground: #18181b;
+      --sidebar-border: #e4e4e7; /* 220 13% 91% */
+      --sidebar-ring: #3b82f6; /* 217.2 91.2% 59.8% */
 }
 
 .dark {
@@ -149,10 +181,42 @@
   }
 }
 
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 .animate-pulse-red-circle {
   animation: pulse-red-circle 0.6s ease-out forwards;
 }
 
 .editor-content img {
   object-fit: contain !important;
+}
+
+ /* Custom KENZAR styles */
+ .gradient-hero {
+  background: var(--gradient-hero);
+}
+
+.gradient-subtle {
+  background: var(--gradient-subtle);
+}
+
+.shadow-elegant {
+  box-shadow: var(--shadow-elegant);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.transition-elegant {
+  transition: var(--transition-elegant);
+}
+
+.transition-quick {
+  transition: var(--transition-quick);
 }

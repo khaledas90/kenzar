@@ -10,52 +10,52 @@ const Policy = () => {
   const policies = [
     {
       icon: RotateCcw,
-      title: 'Return Policy',
+      title: t('returnPolicyTitle'),
       content: [
-        'Returns accepted within 14 days of delivery',
-        'Items must be unworn, unwashed, and in original condition',
-        'Original tags must be attached',
-        'Contact us via WhatsApp to initiate a return',
-        'Customer is responsible for return shipping costs unless item is defective',
+        t('returnPolicy1'),
+        t('returnPolicy2'),
+        t('returnPolicy3'),
+        t('returnPolicy4'),
+        t('returnPolicy5'),
       ],
     },
     {
       icon: Truck,
-      title: 'Delivery Information',
+      title: t('deliveryInformationTitle'),
       content: [
-        'Standard delivery: 3-7 business days (local)',
-        'International shipping: 7-14 business days',
-        'Express delivery available upon request',
-        'Free local delivery on orders over $100',
-        'Tracking information provided for all orders',
+        t('delivery1'),
+        t('delivery2'),
+        t('delivery3'),
+        t('delivery4'),
+        t('delivery5'),
       ],
     },
     {
       icon: Shield,
-      title: 'Quality Guarantee',
+      title: t('qualityGuaranteeTitle'),
       content: [
-        'All items are quality-checked before shipping',
-        'Defective items will be replaced or refunded',
-        'We stand behind the craftsmanship of every piece',
-        'If you receive a damaged item, contact us immediately',
-        '100% satisfaction guarantee',
+        t('quality1'),
+        t('quality2'),
+        t('quality3'),
+        t('quality4'),
+        t('quality5'),
       ],
     },
     {
       icon: Clock,
-      title: 'Processing Time',
+      title: t('processingTimeTitle'),
       content: [
-        'Standard items: 1-2 business days processing',
-        'Custom orders: 5-10 business days',
-        'Processing time excludes weekends and holidays',
-        'You will receive a confirmation when your order ships',
-        'Rush processing available for urgent orders',
+        t('processing1'),
+        t('processing2'),
+        t('processing3'),
+        t('processing4'),
+        t('processing5'),
       ],
     },
   ];
 
   const handleWhatsAppContact = () => {
-    const message = encodeURIComponent("Hi! I have a question about KENZAR's return & delivery policy. Can you help me?");
+    const message = encodeURIComponent(t('whatsappQuestionMessage'));
     window.open(`https://wa.me/+1234567890?text=${message}`, '_blank');
   };
 
@@ -68,7 +68,7 @@ const Policy = () => {
             {t('policyTitle')}
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-inter">
-            Everything you need to know about returns, delivery, and our commitment to quality.
+            {t('introDescription')}
           </p>
         </div>
       </section>
@@ -81,7 +81,7 @@ const Policy = () => {
               <Card key={index} className="shadow-soft hover:shadow-elegant transition-elegant border-0">
                 <CardContent className="p-8">
                   <div className="flex items-center mb-6">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary/10 text-secondary mr-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary/10 text-secondary me-4">
                       <policy.icon className="w-6 h-6" />
                     </div>
                     <h2 className="font-cinzel text-2xl font-semibold text-primary">
@@ -91,7 +91,7 @@ const Policy = () => {
                   <ul className="space-y-3">
                     {policy.content.map((item, itemIndex) => (
                       <li key={itemIndex} className="flex items-start">
-                        <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0" />
+                        <div className="w-2 h-2 bg-secondary rounded-full mt-2 me-3 flex-shrink-0" />
                         <span className="text-muted-foreground font-inter">{item}</span>
                       </li>
                     ))}
@@ -107,42 +107,38 @@ const Policy = () => {
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="font-cinzel text-4xl font-bold text-primary text-center mb-12">
-            Important Notes
+            {t('importantNotesTitle')}
           </h2>
           <div className="max-w-4xl mx-auto">
             <Card className="shadow-soft border-0">
               <CardContent className="p-8">
                 <div className="prose prose-lg max-w-none font-inter">
                   <h3 className="font-cinzel text-xl font-semibold text-primary mb-4">
-                    Custom Orders
+                    {t('customOrdersTitle')}
                   </h3>
                   <p className="text-muted-foreground mb-6">
-                    Custom-made items require additional processing time and may have different return policies. 
-                    We'll discuss all details with you before confirming your custom order.
+                    {t('customOrdersParagraph')}
                   </p>
 
                   <h3 className="font-cinzel text-xl font-semibold text-primary mb-4">
-                    International Shipping
+                    {t('internationalShippingTitle')}
                   </h3>
                   <p className="text-muted-foreground mb-6">
-                    International customers are responsible for any customs duties, taxes, or additional fees 
-                    imposed by their country. These charges are not included in the product price or shipping cost.
+                    {t('internationalShippingParagraph')}
                   </p>
 
                   <h3 className="font-cinzel text-xl font-semibold text-primary mb-4">
-                    Size Exchange
+                    {t('sizeExchangeTitle')}
                   </h3>
                   <p className="text-muted-foreground mb-6">
-                    If you need a different size, we offer one free size exchange within 14 days of delivery. 
-                    The original item must be in perfect condition for exchange.
+                    {t('sizeExchangeParagraph')}
                   </p>
 
                   <h3 className="font-cinzel text-xl font-semibold text-primary mb-4">
-                    Contact for Support
+                    {t('contactSupportTitle')}
                   </h3>
                   <p className="text-muted-foreground">
-                    For any questions about returns, exchanges, or delivery, please contact us via WhatsApp or Instagram. 
-                    We're here to help make your KENZAR experience exceptional.
+                    {t('contactSupportParagraph')}
                   </p>
                 </div>
               </CardContent>
@@ -152,20 +148,20 @@ const Policy = () => {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="py-20 bg-gradient-to-t from-primary via-secondary to-muted/30 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-cinzel text-4xl font-bold mb-6">
-            Have Questions?
+            {t('ctaTitle')}
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90 font-inter">
-            Our team is here to help clarify any policy questions and ensure you have a great experience with KENZAR.
+            {t('ctaDescription')}
           </p>
           <button
             onClick={handleWhatsAppContact}
             className="inline-flex items-center px-8 py-4 bg-white text-primary rounded-lg hover:bg-white/90 transition-elegant font-inter font-medium text-lg"
           >
-            <MessageCircle className="w-5 h-5 mr-2" />
-            Contact Support
+            <MessageCircle className="w-5 h-5 me-2" />
+            {t('contactSupportButton')}
           </button>
         </div>
       </section>

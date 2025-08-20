@@ -12,17 +12,17 @@ const Collection = () => {
     const t = useTranslations("common.collection");
 
     const handleWhatsAppOrder = (item: string) => {
-        const message = encodeURIComponent(`Hi! I'm interested in ordering ${item} from KENZAR collection. Can you help me with details and pricing?`);
+        const message = encodeURIComponent(t('whatsappOrderMessage', { item }));
         window.open(`https://wa.me/+1234567890?text=${message}`, '_blank');
     };
 
     const products = [
-        { id: 1, name: 'Elegant Black Hoodie', category: 'Hoodies', description: 'Premium comfort with sophisticated design' },
-        { id: 2, name: 'Olive Statement Tee', category: 'T-Shirts', description: 'Minimalist elegance in dark olive' },
-        { id: 3, name: 'Classic Black Joggers', category: 'Bottoms', description: 'Comfort meets style' },
-        { id: 4, name: 'Oversized Olive Jacket', category: 'Outerwear', description: 'Bold yet refined streetwear' },
-        { id: 5, name: 'Premium Black Sweatshirt', category: 'Sweatshirts', description: 'Luxury streetwear essential' },
-        { id: 6, name: 'Minimal Olive Shorts', category: 'Bottoms', description: 'Sophisticated summer essential' },
+        { id: 1 },
+        { id: 2 },
+        { id: 3 },
+        { id: 4 },
+        { id: 5 },
+        { id: 6 },
     ];
 
     return (
@@ -50,7 +50,7 @@ const Collection = () => {
                                         <div className="aspect-[3/4] bg-muted relative overflow-hidden">
                                             <Image
                                                 src={collectionImage}
-                                                alt={product.name}
+                                                alt={t(`products.${product.id}.name`)}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-elegant"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-elegant" />
@@ -62,12 +62,12 @@ const Collection = () => {
                                                         size="sm"
                                                         onClick={(e) => {
                                                             e.preventDefault();
-                                                            handleWhatsAppOrder(product.name);
+                                                            handleWhatsAppOrder(t(`products.${product.id}.name`));
                                                         }}
-                                                        className="bg-white/90 text-primary hover:bg-white"
+                                                        className="bg-white/10 border-white text-white hover:bg-white/20"
                                                     >
                                                         <MessageCircle className="w-4 h-4 mr-2" />
-                                                        Order
+                                                        {t('order')}
                                                     </Button>
                                                     <Button
                                                         size="sm"
@@ -84,29 +84,29 @@ const Collection = () => {
 
                                     <div className="p-6">
                                         <div className="text-sm text-secondary font-medium mb-2 font-inter">
-                                            {product.category}
+                                            {t(`products.${product.id}.category`)}
                                         </div>
                                         <Link href={`/product/${product.id}`}>
                                             <h3 className="font-cinzel text-xl font-semibold text-primary mb-2 hover:text-secondary transition-quick">
-                                                {product.name}
+                                                {t(`products.${product.id}.name`)}
                                             </h3>
                                         </Link>
                                         <p className="text-muted-foreground font-inter mb-4">
-                                            {product.description}
+                                            {t(`products.${product.id}.description`)}
                                         </p>
                                         <div className="flex space-x-2">
                                             <Button
                                                 asChild
                                                 variant="outline"
-                                                className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                                                className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary"
                                             >
                                                 <Link href={`/product/${product.id}`}>
-                                                    View Details
+                                                    {t('viewDetails')}
                                                 </Link>
                                             </Button>
                                             <Button
                                                 className="flex-1 bg-primary hover:bg-secondary transition-elegant"
-                                                onClick={() => handleWhatsAppOrder(product.name)}
+                                                onClick={() => handleWhatsAppOrder(t(`products.${product.id}.name`))}
                                             >
                                                 <MessageCircle className="w-4 h-4 mr-2" />
                                                 {t('orderNow')}
@@ -121,13 +121,13 @@ const Collection = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 bg-primary text-primary-foreground">
+            <section className="py-20 bg-gradient-to-t from-primary via-secondary to-white text-primary-foreground">
                 <div className="container mx-auto px-4 text-center">
                     <h2 className="font-cinzel text-4xl font-bold mb-6">
-                        Custom Orders Available
+                        {t('customOrdersAvailable')}
                     </h2>
                     <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90 font-inter">
-                        Can't find exactly what you're looking for? We offer custom designs and personalization.
+                        {t('customOrdersDescription')}
                     </p>
                     <Button
                         size="lg"
@@ -136,7 +136,7 @@ const Collection = () => {
                         className="border-white text-white hover:bg-white hover:text-primary"
                     >
                         <MessageCircle className="w-5 h-5 mr-2" />
-                        Request Custom Design
+                        {t('requestCustomDesign')}
                     </Button>
                 </div>
             </section>

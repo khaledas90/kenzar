@@ -23,7 +23,7 @@ export default function About() {
               asChild
               variant="outline"
               size="lg"
-              className="border-[#252219] text-[#252219] hover:bg-[#252219] hover:text-secondary-foreground"
+              className="border-[#252219] text-[#252219] hover:bg-[#252219] hover:text-secondary"
             >
               <Link href="/about">
                 {t("Learn More")}
@@ -32,7 +32,7 @@ export default function About() {
             </Button>
           </div>
           <div className="rtl:lg:order-1 ltr:lg:order-2">
-            <div className="aspect-[4/5] bg-muted rounded-lg overflow-hidden shadow-elegant">
+            <div className="aspect-square bg-muted rounded-lg overflow-hidden shadow-elegant">
               <Image
                 src={heroImage}
                 alt="About KENZAR"

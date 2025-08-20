@@ -57,7 +57,7 @@ export default function Collection() {
             asChild
             size="lg"
             variant="outline"
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            className="border-primary text-primary hover:bg-primary hover:text-primary"
           >
             <Link href="/collection">
               {t("View Full Collection")}

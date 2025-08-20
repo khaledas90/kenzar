@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
+import { Cairo } from "next/font/google";
 import "./globals.css";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import Providers from "./providers";
@@ -9,14 +10,18 @@ import { NextIntlClientProvider } from "next-intl";
 import Header from "@/components/Layout/header";
 import Footer from "@/components/Layout/footer";
 
+// Latin fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// Arabic font (Cairo is widely supported and works well)
+const cairo = Cairo({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {};
@@ -36,19 +41,33 @@ export default async function RootLayout({
   const { locale } = await params;
   const messages = await getMessages({ locale }).catch(() => ({}));
 
+  // Compose font variables based on locale
+  const fontVars =
+    locale === "ar"
+      ? `${cairo.variable}`
+      : `${geistSans.variable}`;
+
+  // Use the Arabic font family for body if Arabic
+  const bodyClass =
+    "antialiased" + (locale === "ar" ? " font-[var(--font-arabic)]" : "");
+
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <html
         lang={locale}
         dir={locale === "ar" ? "rtl" : "ltr"}
-        className={`${geistSans.variable} ${geistMono.variable}`}
+        className={fontVars}
         suppressHydrationWarning
       >
-        <body className="antialiased">
+        <body className={bodyClass}>
           <Providers>
             <Header />
             <Toaster richColors position="top-right" />
-            <SidebarProvider>{children}</SidebarProvider>
+            <SidebarProvider>
+              <main className="pt-16">
+                {children}
+              </main>
+            </SidebarProvider>
             <Footer />
           </Providers>
         </body>

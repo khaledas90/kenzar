@@ -9,7 +9,7 @@ const Contact = () => {
   const t  = useTranslations("common.contact");
 
   const handleWhatsAppContact = () => {
-    const message = encodeURIComponent("Hi! I'd like to get in touch with KENZAR. How can we connect?");
+    const message = encodeURIComponent(t('whatsappMessage'));
     window.open(`https://wa.me/+1234567890?text=${message}`, '_blank');
   };
 
@@ -24,14 +24,14 @@ const Contact = () => {
     {
       icon: MessageCircle,
       title: t('whatsapp'),
-      description: 'Chat with us directly',
+      description: t('chatDirectly'),
       action: handleWhatsAppContact,
       primary: true,
     },
     {
       icon: Mail,
-      title: 'Email',
-      description: 'info@kenzar.wear',
+      title: t('email'),
+      description: t('emailAddress'),
       action: () => window.open('mailto:info@kenzar.wear'),
       primary: false,
     },
@@ -40,13 +40,13 @@ const Contact = () => {
   const businessInfo = [
     {
       icon: Clock,
-      title: 'Business Hours',
-      description: '9:00 AM - 8:00 PM (Local Time)',
+      title: t('businessHoursTitle'),
+      description: t('businessHours'),
     },
     {
       icon: MapPin,
-      title: 'Service Area',
-      description: 'Worldwide Shipping Available',
+      title: t('serviceAreaTitle'),
+      description: t('serviceArea'),
     },
   ];
 
@@ -90,9 +90,9 @@ const Contact = () => {
                   </p>
                   <Button 
                     variant={method.primary ? "default" : "outline"}
-                    className={method.primary ? "bg-secondary hover:bg-secondary/90" : ""}
+                    className={method.primary ? "bg-secondary hover:bg-secondary/90" : "hover:text-black/50"}
                   >
-                    Connect Now
+                    {t('connectNow')}
                   </Button>
                 </CardContent>
               </Card>
@@ -126,25 +126,25 @@ const Contact = () => {
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="font-cinzel text-4xl font-bold text-primary text-center mb-12">
-            Frequently Asked Questions
+            {t('faqsTitle')}
           </h2>
           <div className="max-w-3xl mx-auto space-y-6">
             {[
               {
-                question: 'How can I place an order?',
-                answer: 'You can place an order by contacting us via WhatsApp or Instagram. We\'ll help you choose the perfect items and arrange payment and delivery.',
+                question: t('faq1Question'),
+                answer: t('faq1Answer'),
               },
               {
-                question: 'Do you ship internationally?',
-                answer: 'Yes! We offer worldwide shipping. Shipping costs and delivery times vary by location.',
+                question: t('faq2Question'),
+                answer: t('faq2Answer'),
               },
               {
-                question: 'What sizes are available?',
-                answer: 'We offer sizes from XS to XXL. If you need custom sizing, just let us know when you contact us.',
+                question: t('faq3Question'),
+                answer: t('faq3Answer'),
               },
               {
-                question: 'Can I customize a design?',
-                answer: 'Absolutely! We love creating custom pieces. Contact us with your ideas and we\'ll work together to bring your vision to life.',
+                question: t('faq4Question'),
+                answer: t('faq4Answer'),
               },
             ].map((faq, index) => (
               <Card key={index} className="shadow-soft border-0">
@@ -163,13 +163,13 @@ const Contact = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="py-20 bg-gradient-to-t from-primary via-secondary to-muted/30 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-cinzel text-4xl font-bold mb-6">
-            Ready to Connect?
+            {t('ctaTitle')}
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90 font-inter">
-            We're here to help you find the perfect KENZAR pieces for your wardrobe.
+            {t('ctaDescription')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -178,16 +178,16 @@ const Contact = () => {
               onClick={() => window.open('https://instagram.com/kenzar.wear', '_blank')}
               className="border-white text-white hover:bg-white hover:text-primary"
             >
-              <Instagram className="w-5 h-5 mr-2" />
-              Follow on Instagram
+              <Instagram className="w-5 h-5 me-2" />
+              {t('followOnInstagram')}
             </Button>
             <Button 
               size="lg"
               onClick={handleWhatsAppContact}
-              className="bg-white text-primary hover:bg-white/90"
+              className="text-white hover:bg-white hover:text-primary transition-elegant border-white border-[1px]"
             >
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Start WhatsApp Chat
+              <MessageCircle className="w-5 h-5 me-2" />
+              {t('startWhatsAppChat')}
             </Button>
           </div>
         </div>
