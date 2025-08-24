@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import collectionImage from "@/components/assets/hero/collection-image.jpg";
+import { products } from "@/lib/data";
 
 export default function Collection() {
   const t = useTranslations("common.hero");
@@ -23,27 +23,29 @@ export default function Collection() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[1, 2, 3].map((item) => (
+          {products.map((item) => (
             <Card
-              key={item}
+              key={item.id}
               className="group cursor-pointer shadow-soft hover:shadow-elegant transition-elegant border-0"
             >
               <CardContent className="p-0">
-                <Link href={`/product/${item}`}>
+                <Link href={`/product/${item.id}`}>
                   <div className="aspect-[3/4] bg-muted relative overflow-hidden">
                     <Image
-                      src={collectionImage}
-                      alt={`KENZAR Collection Item ${item}`}
+                      src={item.images[0]}
+                      width={500}
+                      height={500}
+                      alt={`KENZAR Collection Item ${item.name}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-elegant"
                     />
                     <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-elegant" />
                   </div>
                   <div className="p-6">
-                    <h3 className="font-cinzel text-xl font-semibold text-primary mb-2 hover:text-secondary transition-quick">
-                      Premium Item {item}
+                    <h3 className="font-cinzel text-xl line-clamp-1 font-semibold text-primary mb-2 hover:text-secondary transition-quick">
+                      {item.name}
                     </h3>
-                    <p className="text-muted-foreground font-inter">
-                      Elegant streetwear piece
+                    <p className="text-muted-foreground line-clamp-2 font-inter">
+                      {item.shortDescription}
                     </p>
                   </div>
                 </Link>

@@ -1,8 +1,11 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import collectionImage from "@/components/assets/hero/collection-image.jpg";
+import heroImage from "@/components/assets/hero/hero-image.jpg";
+import aboutImage from "@/components/assets/about/about-image.jpg";
 import {
   MessageCircle,
   Heart,
@@ -12,129 +15,184 @@ import {
   Truck,
   Shield,
   Star,
-  Info,
 } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
-import { products } from "@/lib/data";
 
-interface Product {
-  id: string;
-  name: string;
-  shortDescription: string;
-  fullDescription: string;
-  material: {
-    main: string;
-    lining: string;
-    season: string;
-  };
-  price: number;
-  currency: string;
-  sizes: string[];
-  images: any[];
-}
-
-const generateSlug = (name: string): string => {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9 -]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .trim();
-};
-const findProductBySlug = (
-  products: Record<string, Product>,
-  slug: string
-): Product | undefined => {
-  return Object.values(products).find((product) => product.id === slug);
-};
-
-const ProductDetails: React.FC = () => {
-  const { id } = useParams() as { id: string };
-
-  console.log(id);
-
+const ProductDetails = () => {
+  const { id } = useParams();
   const t = useTranslations("common.productDetails");
   const locale = useLocale();
-  const isRTL: boolean =
+  const isRTL =
     locale === "ar" || locale === "he" || locale === "fa" || locale === "ur";
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
-  const [selectedSize, setSelectedSize] = useState<string>("");
-  const [selectedImage, setSelectedImage] = useState<number>(0);
-  const [isWishlisted, setIsWishlisted] = useState<boolean>(false);
-  const reviewsRef = useRef<HTMLDivElement | null>(null);
-
-  const productsObject = products.reduce(
-    (acc: Record<string, Product>, product) => {
-      acc[product.id] = product;
-      return acc;
+  // Mock product data - in a real app, this would come from an API
+  const products = {
+    "1": {
+      id: "1",
+      name: "Elegant Black Hoodie",
+      arabicName: "هودي أسود أنيق",
+      category: "Hoodies",
+      arabicCategory: "هوديز",
+      price: "Contact for Price",
+      arabicPrice: "تواصل للسعر",
+      description:
+        "A premium black hoodie that embodies the KENZAR philosophy of psychological comfort meets sophisticated design. Crafted from high-quality cotton blend for ultimate comfort and durability.",
+      arabicDescription:
+        "هودي أسود فاخر يجسد فلسفة كنزار في الراحة النفسية مع التصميم المتطور. مصنوع من خليط قطني عالي الجودة للراحة القصوى والمتانة.",
+      features: [
+        "Premium cotton blend fabric",
+        "Oversized comfortable fit",
+        "Reinforced seams for durability",
+        "Soft inner lining",
+        "Adjustable drawstring hood",
+        "Kangaroo pocket design",
+      ],
+      arabicFeatures: [
+        "قماش خليط قطني فاخر",
+        "قصة واسعة مريحة",
+        "خياطة معززة للمتانة",
+        "بطانة داخلية ناعمة",
+        "غطاء رأس قابل للتعديل",
+        "تصميم جيب الكنغر",
+      ],
+      sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+      images: [collectionImage, heroImage, aboutImage],
+      inStock: true,
+      rating: 4.9,
+      reviews: 127,
     },
-    {}
-  );
+    "2": {
+      id: "2",
+      name: "Olive Statement Tee",
+      arabicName: "تيشيرت زيتي مميز",
+      category: "T-Shirts",
+      arabicCategory: "تيشيرتات",
+      price: "Contact for Price",
+      arabicPrice: "تواصل للسعر",
+      description:
+        "Minimalist elegance in our signature dark olive. This premium t-shirt represents the essence of KENZAR - simple yet meaningful, comfortable yet distinctive.",
+      arabicDescription:
+        "أناقة بسيطة بلونا الزيتي المميز. هذا التيشيرت الفاخر يمثل جوهر كنزار - بسيط لكن ذو معنى، مريح لكن مميز.",
+      features: [
+        "Organic cotton construction",
+        "Regular fit design",
+        "Breathable fabric",
+        "Pre-shrunk material",
+        "Ribbed crew neck",
+        "Double-stitched hems",
+      ],
+      arabicFeatures: [
+        "مصنوع من القطن العضوي",
+        "تصميم قصة عادية",
+        "قماش قابل للتنفس",
+        "مادة مقلصة مسبقاً",
+        "رقبة مضلعة",
+        "حواف مخيطة مرتين",
+      ],
+      sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+      images: [aboutImage, collectionImage, heroImage],
+      inStock: true,
+      rating: 4.8,
+      reviews: 89,
+    },
+    "3": {
+      id: "3",
+      name: "Stillness Bluezone - Two-Tone Jacket",
+      arabicName: "جاكيت ستيلنيس بلوزون - لونين",
+      category: "Jackets",
+      arabicCategory: "جاكيتات",
+      price: "EGP 1,250.00",
+      arabicPrice: "1,250.00 جنيه مصري",
+      description:
+        'The "Stillness" jacket from KENZAR is more than just a piece of clothing; it is an expression of balance, strength, and inner calm. It combines classic black with modern gray in a clean design and elegant construction. It is meticulously crafted to deliver comfort and distinction in every detail.',
+      arabicDescription:
+        'جاكيت "ستيلنيس" من كنزار هو أكثر من مجرد قطعة ملابس؛ إنه تعبير عن التوازن والقوة والهدوء الداخلي. يجمع بين الأسود الكلاسيكي والرمادي العصري في تصميم نظيف وبناء أنيق. مصنوع بعناية فائقة لتوفير الراحة والتميز في كل التفاصيل.',
+      features: [
+        "High-quality materials: 70% luxurious wool / 30% polyester",
+        "Soft knit collar for ultimate comfort",
+        "Durable front zipper construction",
+        '"Stillness" embroidery on the back',
+        "Limited edition design",
+        "Soft cotton blend lining",
+        "All-year-round wearability",
+      ],
+      arabicFeatures: [
+        "مواد عالية الجودة: 70% صوف فاخر / 30% بوليستر",
+        "ياقة محاكة ناعمة للراحة القصوى",
+        "سحاب أمامي متين البناء",
+        'تطريز "ستيلنيس" على الظهر',
+        "تصميم إصدار محدود",
+        "بطانة ناعمة من خليط القطن",
+        "قابل للارتداء على مدار السنة",
+      ],
+      sizes: ["S", "M", "L", "XL"],
+      images: [
+        "/lovable-uploads/60e9aca1-2fd3-42ac-a4ba-7c3d23f8ad7e.png",
+        "/lovable-uploads/fc765835-491a-4c73-8d9b-0a0e4076dfe0.png",
+        "/lovable-uploads/9d283626-a700-425b-a80a-088060c33c6b.png",
+        "/lovable-uploads/6c3b70db-0d59-4955-8138-e5484ec7e62c.png",
+      ],
+      inStock: true,
+      rating: 4.9,
+      reviews: 156,
+      productCode: "KZ-STL001",
+    },
+  };
 
-  const product: Product | undefined = findProductBySlug(productsObject, id);
-
-  console.log(product);
+  const product = products[id as keyof typeof products];
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="font-cinzel text-4xl font-bold text-primary mb-4">
-            Product Not Found
-          </h1>
-          <Link
-            href="/collection"
-            className="text-secondary hover:text-secondary/80 underline"
-          >
-            Back to Collection
-          </Link>
+      <>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="font-cinzel text-4xl font-bold text-primary mb-4">
+              Product Not Found
+            </h1>
+            <Link
+              href="/collection"
+              className="text-secondary hover:text-secondary/80 underline"
+            >
+              Back to Collection
+            </Link>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
-  const handleWhatsAppOrder = (): void => {
-    const productName: string = product.name;
-    const size: string = selectedSize ? ` (Size: ${selectedSize})` : "";
-    const message: string = encodeURIComponent(
+  const handleWhatsAppOrder = () => {
+    const productName = isRTL ? product.arabicName : product.name;
+    const size = selectedSize ? ` (Size: ${selectedSize})` : "";
+    const message = encodeURIComponent(
       `Hi! I'm interested in ordering the ${productName}${size} from KENZAR. Can you help me with details and pricing?`
     );
     window.open(`https://wa.me/+201024657204?text=${message}`, "_blank");
   };
 
-  const handleShare = (): void => {
+  const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: product.name,
+        title: isRTL ? product.arabicName : product.name,
         text: "Check out this amazing piece from KENZAR",
         url: window.location.href,
       });
     }
   };
 
-  const formatCurrency = (value: number, currency: string = "EGP"): string => {
-    try {
-      const localeForCurrency: string = isRTL ? "ar-EG" : "en-EG";
-      return new Intl.NumberFormat(localeForCurrency, {
-        style: "currency",
-        currency: currency,
-        maximumFractionDigits: 2,
-      }).format(value);
-    } catch {
-      return `${value} ${currency}`;
-    }
-  };
-
-  const category: string = product.name.includes("Jacket")
-    ? "Outerwear"
-    : product.name.includes("Shirt")
-    ? "Tops"
-    : product.name.includes("Pant")
-    ? "Bottoms"
-    : "Fashion";
+  const currentName = isRTL ? product.arabicName : product.name;
+  const currentCategory = isRTL ? product.arabicCategory : product.category;
+  const currentDescription = isRTL
+    ? product.arabicDescription
+    : product.description;
+  const currentFeatures = isRTL ? product.arabicFeatures : product.features;
+  const currentPrice = isRTL ? product.arabicPrice : product.price;
 
   return (
     <>
@@ -150,17 +208,17 @@ const ProductDetails: React.FC = () => {
               href="/"
               className="text-muted-foreground hover:text-primary transition-quick"
             >
-              {t("home") || "Home"}
+              {t("home")}
             </Link>
             <span className="text-muted-foreground">/</span>
             <Link
               href="/collection"
               className="text-muted-foreground hover:text-primary transition-quick"
             >
-              {t("collection") || "Collection"}
+              {t("collection")}
             </Link>
             <span className="text-muted-foreground">/</span>
-            <span className="text-primary">{product.name}</span>
+            <span className="text-primary">{currentName}</span>
           </div>
         </div>
       </section>
@@ -176,11 +234,8 @@ const ProductDetails: React.FC = () => {
                 <div className="aspect-square bg-muted rounded-lg overflow-hidden mb-4 shadow-elegant">
                   <Image
                     src={product.images[selectedImage]}
-                    alt={product.name}
-                    width={600}
-                    height={600}
+                    alt={currentName}
                     className="w-full h-full object-cover"
-                    priority
                   />
                 </div>
 
@@ -202,9 +257,7 @@ const ProductDetails: React.FC = () => {
                     >
                       <Image
                         src={image}
-                        alt={`${product.name} ${index + 1}`}
-                        width={80}
-                        height={80}
+                        alt={`${currentName} ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
                     </button>
@@ -227,13 +280,13 @@ const ProductDetails: React.FC = () => {
                   Back to Collection
                 </Link>
 
-                <h1 className="font-cinzel text-4xl md:text-5xl font-bold text-primary mb-4">
-                  {product.name}
-                </h1>
-
                 <Badge variant="secondary" className="mb-4">
-                  {category}
+                  {currentCategory}
                 </Badge>
+
+                <h1 className="font-cinzel text-4xl md:text-5xl font-bold text-primary mb-4">
+                  {currentName}
+                </h1>
 
                 <div
                   className={`flex items-center space-x-4 mb-6 ${
@@ -249,24 +302,15 @@ const ProductDetails: React.FC = () => {
                       <Star
                         key={i}
                         className={`w-4 h-4 ${
-                          i < 4
+                          i < Math.floor(product.rating)
                             ? "text-yellow-500 fill-current"
                             : "text-muted-foreground"
                         }`}
                       />
                     ))}
-                    <button
-                      type="button"
-                      onClick={() =>
-                        reviewsRef.current?.scrollIntoView({
-                          behavior: "smooth",
-                          block: "start",
-                        })
-                      }
-                      className="text-sm text-muted-foreground ml-2 font-inter underline underline-offset-4 hover:text-primary transition-quick"
-                    >
-                      4.5 (12 reviews)
-                    </button>
+                    <span className="text-sm text-muted-foreground ml-2 font-inter">
+                      {product.rating} ({product.reviews} reviews)
+                    </span>
                   </div>
                   <div
                     className={`flex items-center space-x-2 ${
@@ -290,11 +334,9 @@ const ProductDetails: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mb-6">
-                  <span className="font-cinzel text-3xl font-bold text-secondary">
-                    {formatCurrency(product.price, product.currency)}
-                  </span>
-                </div>
+                <p className="font-cinzel text-2xl font-semibold text-secondary mb-6">
+                  {currentPrice}
+                </p>
               </div>
 
               {/* Size Selection */}
@@ -308,12 +350,12 @@ const ProductDetails: React.FC = () => {
                     Size Guide
                   </Button>
                 </div>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-6 gap-3">
                   {product.sizes.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-3 py-6 border-2 rounded-lg font-inter font-medium transition-quick ${
+                      className={`aspect-square border-2 rounded-lg font-inter font-medium transition-quick ${
                         selectedSize === size
                           ? "border-secondary bg-secondary text-secondary-foreground"
                           : "border-border hover:border-secondary"
@@ -325,60 +367,31 @@ const ProductDetails: React.FC = () => {
                 </div>
               </div>
 
-              {/* Short Description */}
-              <div className="mb-8">
-                <h3 className="font-cinzel text-lg font-semibold text-primary mb-4">
-                  Overview
-                </h3>
-                <p className="text-muted-foreground font-inter leading-relaxed">
-                  {product.shortDescription}
-                </p>
-              </div>
-
-              {/* Full Description */}
+              {/* Description */}
               <div className="mb-8">
                 <h3 className="font-cinzel text-lg font-semibold text-primary mb-4">
                   Description
                 </h3>
-                <div className="text-muted-foreground font-inter leading-relaxed whitespace-pre-line">
-                  {product.fullDescription}
-                </div>
+                <p className="text-muted-foreground font-inter leading-relaxed">
+                  {currentDescription}
+                </p>
               </div>
 
-              {/* Material Information */}
+              {/* Features */}
               <div className="mb-8">
                 <h3 className="font-cinzel text-lg font-semibold text-primary mb-4">
-                  Material & Care
+                  Features
                 </h3>
-                <div className="space-y-3">
-                  <div className="flex items-start">
-                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0" />
-                    <div>
-                      <span className="font-medium">Main Material:</span>
-                      <span className="text-muted-foreground ml-2">
-                        {product.material.main}
+                <ul className="space-y-2">
+                  {currentFeatures.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0" />
+                      <span className="text-muted-foreground font-inter">
+                        {feature}
                       </span>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0" />
-                    <div>
-                      <span className="font-medium">Lining:</span>
-                      <span className="text-muted-foreground ml-2">
-                        {product.material.lining}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0" />
-                    <div>
-                      <span className="font-medium">Season:</span>
-                      <span className="text-muted-foreground ml-2">
-                        {product.material.season}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Order Button */}
@@ -390,9 +403,7 @@ const ProductDetails: React.FC = () => {
                   disabled={!selectedSize}
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  {selectedSize
-                    ? t("orderNow") || "Order Now"
-                    : "Select Size to Order"}
+                  {selectedSize ? t("orderNow") : "Select Size to Order"}
                 </Button>
 
                 {!selectedSize && (
@@ -434,81 +445,6 @@ const ProductDetails: React.FC = () => {
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section className="py-12" ref={reviewsRef} id="reviews">
-        <div className="container mx-auto px-4">
-          <h2 className="font-cinzel text-3xl font-bold text-primary mb-8">
-            Customer Reviews
-          </h2>
-          <div className="space-y-4">
-            {/* Sample reviews - you can replace with actual data */}
-            <Card className="shadow-soft border-0">
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <p className="font-inter font-semibold text-primary">
-                      Ahmed Mohamed
-                    </p>
-                    <div className="flex items-center gap-1 mt-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-4 h-4 ${
-                            i < 5
-                              ? "text-yellow-500 fill-current"
-                              : "text-muted-foreground"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <span className="text-xs text-muted-foreground font-inter">
-                    2 days ago
-                  </span>
-                </div>
-                <p className="text-muted-foreground font-inter leading-relaxed">
-                  Excellent quality jacket! The material feels premium and the
-                  fit is perfect. The dual-color design is very stylish. Highly
-                  recommended!
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-soft border-0">
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <p className="font-inter font-semibold text-primary">
-                      Sarah Ali
-                    </p>
-                    <div className="flex items-center gap-1 mt-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-4 h-4 ${
-                            i < 4
-                              ? "text-yellow-500 fill-current"
-                              : "text-muted-foreground"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <span className="text-xs text-muted-foreground font-inter">
-                    1 week ago
-                  </span>
-                </div>
-                <p className="text-muted-foreground font-inter leading-relaxed">
-                  Great jacket for both casual and formal occasions. The
-                  embroidery detail on the back is a nice touch. Worth every
-                  penny!
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Related Products */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
@@ -525,30 +461,33 @@ const ProductDetails: React.FC = () => {
                   className="group shadow-soft hover:shadow-elegant transition-elegant border-0"
                 >
                   <CardContent className="p-0">
-                    <Link
-                      href={`/product/${generateSlug(relatedProduct.name)}`}
-                    >
+                    <Link href={`/product/${relatedProduct.id}`}>
                       <div className="aspect-[3/4] bg-muted relative overflow-hidden">
                         <Image
                           src={relatedProduct.images[0]}
-                          width={400}
-                          height={533}
-                          alt={relatedProduct.name}
+                          alt={
+                            isRTL
+                              ? relatedProduct.arabicName
+                              : relatedProduct.name
+                          }
                           className="w-full h-full object-cover group-hover:scale-105 transition-elegant"
                         />
                       </div>
                       <div className="p-6">
                         <div className="text-sm text-secondary font-medium mb-2 font-inter">
-                          {category}
+                          {isRTL
+                            ? relatedProduct.arabicCategory
+                            : relatedProduct.category}
                         </div>
                         <h3 className="font-cinzel text-xl font-semibold text-primary mb-2">
-                          {relatedProduct.name}
+                          {isRTL
+                            ? relatedProduct.arabicName
+                            : relatedProduct.name}
                         </h3>
                         <p className="text-muted-foreground font-inter">
-                          {formatCurrency(
-                            relatedProduct.price,
-                            relatedProduct.currency
-                          )}
+                          {isRTL
+                            ? relatedProduct.arabicPrice
+                            : relatedProduct.price}
                         </p>
                       </div>
                     </Link>
