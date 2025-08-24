@@ -525,9 +525,7 @@ const ProductDetails: React.FC = () => {
                   className="group shadow-soft hover:shadow-elegant transition-elegant border-0"
                 >
                   <CardContent className="p-0">
-                    <Link
-                      href={`/product/${generateSlug(relatedProduct.name)}`}
-                    >
+                    <Link href={`/product/${generateSlug(relatedProduct.id)}`}>
                       <div className="aspect-[3/4] bg-muted relative overflow-hidden">
                         <Image
                           src={relatedProduct.images[0]}
